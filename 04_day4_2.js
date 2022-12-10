@@ -20,6 +20,10 @@ var getSections = function (pairList) {
     var sections = [firstArr, secondArr];
     return sections;
 };
+var getIntersection = function (arr1, arr2) {
+    var intersection = arr1.filter(function (x) { return arr2.includes(x); });
+    return intersection;
+};
 var isAlreadyCovered = function (arr1, arr2) {
     var notIncludedFound = false;
     for (var i = arr2[0]; i <= arr2.at(-1); i++) {
@@ -36,14 +40,13 @@ var isAlreadyCovered = function (arr1, arr2) {
         }
     }
     return true;
-}
-
+};
 var runProgram = function (list) {
     var result = 0;
     for (var i = 0; i < list.length; i++) {
         var sections = getSections(list[i]);
-        var isCovered = isAlreadyCovered(sections[0], sections[1]);
-        isCovered ? result++ : result;
+        var hasIntersection = getIntersection(sections[0], sections[1]).length > 0;
+        hasIntersection ? result++ : result;
     }
     console.log(result);
     return result;
